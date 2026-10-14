@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Accesibilidad propia: foco visible y movimiento reducido. */
+:focus-visible {
+  outline: 3px solid #005fcc;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

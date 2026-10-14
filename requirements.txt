@@ -1,0 +1,7 @@
+# Runtime objetivo: Python 3.12 (ver .python-version). Markitdown exige >=3.10.
+fastapi==0.128.8
+uvicorn==0.39.0
+python-multipart==0.0.20
+httpx==0.28.1
+pytest==8.4.2
+markitdown[all]==0.1.8; python_version >= "3.10"

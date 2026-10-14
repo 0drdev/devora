@@ -1,0 +1,8 @@
+__pycache__
+*.pyc
+.venv
+.venv312
+.git
+node_modules
+openspec/changes/**/specs
+/tmp/mdwheel
