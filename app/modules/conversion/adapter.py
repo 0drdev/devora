@@ -25,12 +25,18 @@ def convert_bytes(data: bytes, filename: str) -> ConversionResult:
 
     import io
 
-    from app.modules.fidelity.checks import analyze
+    from app.modules.fidelity.checks import analyze, strip_data_images
 
     md = MarkItDown(enable_plugins=False)
     result = md.convert_stream(io.BytesIO(data), file_extension=_ext(filename))
-    text = result.markdown or ""
-    return ConversionResult(markdown=text, warnings=analyze(text, _ext(filename)))
+    text, stripped = strip_data_images(result.markdown or "")
+    warnings = analyze(text, _ext(filename))
+    if stripped:
+        warnings.append(
+            f"{stripped} imagen(es) incrustada(s) se reemplazaron por "
+            "marcadores para mantener el Markdown reutilizable."
+        )
+    return ConversionResult(markdown=text, warnings=warnings)
 
 
 def _ext(filename: str) -> str:

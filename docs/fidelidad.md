@@ -18,6 +18,7 @@ Ajustables sin código con `MAX_UPLOAD_MB`, `RETENTION_MINUTES` y `MAX_ZIP_MB`.
 Taxonomía de advertencias (`app/modules/fidelity/checks.py`):
 - `No se pudo extraer texto del documento.` (+ orientación sobre escaneados/OCR si es PDF o imagen).
 - `Una imagen no tenía texto alternativo; se marcó como vacía.`
+- `N imagen(es) incrustada(s) se reemplazaron por marcadores...` (base64 de Word/PDF fuera; el binario no sirve a un LLM).
 - `La hoja no contenía tablas detectables en el resultado.`
 
 Regla: ninguna pérdida es silenciosa; el resultado siempre incluye la lista de advertencias.

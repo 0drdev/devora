@@ -4,6 +4,23 @@ from __future__ import annotations
 import re
 
 
+def strip_data_images(markdown: str) -> tuple[str, int]:
+    """Reemplaza imágenes incrustadas en base64 por marcadores.
+
+    El base64 no sirve a modelos/LLM, infla el resultado y rompe la
+    copia/descarga. Retorna (markdown_limpio, cantidad_reemplazada).
+    """
+    count = 0
+
+    def _repl(match: re.Match[str]) -> str:
+        nonlocal count
+        count += 1
+        return f"![imagen incrustada sin texto alternativo](imagen-{count}.png)"
+
+    clean = re.sub(r"!\[[^\]]*\]\(data:[^)]+\)", _repl, markdown or "")
+    return clean, count
+
+
 def analyze(markdown: str, source_ext: str = "") -> list[str]:
     warnings: list[str] = []
     text = markdown or ""
